@@ -12,7 +12,7 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
   1. [Line Length](#line-length)
   1. [Quotes](#quotes)
   1. [Comments](#comments)
-    1. [Classes](#classes)
+    1. [Class](#class)
     1. [Inline](#inline)
   1. [Variable Declarations](#variable-declarations)
   1. [Function Declarations](#function-declarations)
@@ -88,8 +88,27 @@ Use single-quotes `''` for all strings, and use double-quotes `""` for strings w
 **[top](#table-of-contents)**
 
 ## Comments
+Comments are strongly encouraged. It is very useful to be able to read comments and understand the intentions of a given block of code. The comments need to be clear, just like the code they are annotating. Make sure your comments are meaningful. The following example is a case where a comment is completely erroneous, and can actually make the code harder to read.
 
-### Classes
+    ```typescript
+    // Set index to zero.
+    var index = 0;
+    ```
+    
+All public functions must have a comment block `/**...*/` using [JSDoc](http://usejsdoc.org/) style comments. JSDocs can be interpreted by IDEs for better intellisense. Below is an example of a JSDoc comment block for a function.
+
+    ```typescript
+    /**
+     * Takes in a name and returns a greeting string.
+     * 
+     * @param name The name of the greeted person.
+     */
+    function getGreeting(name: string) {
+        return 'Hello ' + name + '!';
+    }
+    ```
+
+### Class
 
 ### Inline
 
