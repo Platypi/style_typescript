@@ -142,13 +142,43 @@ All classes must have block comments `/**...*/` for all public variables and fun
           console.log(this.name + ' is now walking.');
           
           setTimeout(() => {
-            console.log(this.name + ' has stopped walking.');
+              console.log(this.name + ' has stopped walking.');
           }, millis);
       }
   }
   ```
 
 ### Inline
+
+Inline comments are comments inside of complex statements (loops, functions, etc). Use `//` for all inline comments. Keep comments clear and concise. Place inline comments on a newline above the line they are annotating, and put an empty line before the comment.
+
+  ```typescript
+  // bad
+  var lines: Array<string>; // Holds all the lines in the file.
+  
+  // good
+  // Holds all the lines in the file.
+  var lines: Array<string>;
+  
+  // bad
+  function walkFor(name: string, millis: number) {
+      console.log(name + ' is now walking.');
+      // Wait for millis milliseconds to stop walking
+      setTimeout(() => {
+          console.log(name + ' has stopped walking.');
+      }, millis);
+  }
+  
+  // good
+  function walkFor(name: string, millis: number) {
+      console.log(name + ' is now walking.');
+      
+      // Wait for millis milliseconds to stop walking
+      setTimeout(() => {
+          console.log(name + ' has stopped walking.');
+      }, millis);
+  }
+  ```
 
 **[top](#table-of-contents)**
 
