@@ -212,8 +212,31 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 ## Variable Declarations
 
   - All variables must be declared prior to using them. This aids in code readability and helps prevent undeclared variables from being hoisted onto the global scope. 
+  
+  ```typescript
+  // bad
+  console.log(a + b);
+
+  var a = 2,
+      b = 4;
+
+  // good
+  var a = 2,
+      b = 4;
+      
+  console.log(a + b);
+  ```
+
   - Implied global variables should never be used. 
   - You should never define a variable on the global scope from within a smaller scope.
+  
+  // bad
+  function add(a: number, b: number) {
+      // c is on the global scope!
+      c = 6;
+      
+      return a + b + c;
+  }
 
 **[top](#table-of-contents)**
 
