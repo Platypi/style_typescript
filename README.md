@@ -110,6 +110,44 @@ All public functions must have a comment block `/**...*/` using [JSDoc](http://u
 
 ### Class
 
+All classes must have block comments `/**...*/` for all public variables and functions. All public functions should use [JSDoc](http://usejsdoc.org/) style comments. Functions need to have a comment explaining what the function does, and all of the input parameters need to be annotated with `@param`. The class should include a block comment containing the description of the class, and the constructor should contain a JSDoc comment annotating any input parameters.
+
+  ```typescript
+  /**
+   * Contains properties of a Person.
+   */
+  class Person {
+      /**
+       * Returns a new Person with the specified name.
+       * 
+       * @param name The name of the new Person.
+       */
+      static GetPerson(name: string) {
+          return new Person(name);
+      }
+      
+      /**
+       * @param name The name of the new Person.
+       */
+      constructor(public name: string) { }
+
+      /**
+       * Instructs this Person to walk for a certain amount 
+       * of time.
+       *
+       * @param millis The number of milliseconds the Person 
+       * should walk.
+       */
+      walkFor(millis: number) {
+          console.log(this.name + ' is now walking.');
+          
+          setTimeout(() => {
+            console.log(this.name + ' has stopped walking.');
+          }, millis);
+      }
+  }
+  ```
+
 ### Inline
 
 **[top](#table-of-contents)**
