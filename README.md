@@ -68,7 +68,7 @@ Lines must not be longer than 140 characters. When a statement runs over 140 cha
 ## Quotes
 Use single-quotes `''` for all strings, and use double-quotes `""` for strings within strings.
 
-    ```typescript
+    ```javascript
     // bad
     var greeting = "Hello World!";
     
