@@ -48,7 +48,7 @@ When developing software as an organization, the value of the software produced 
 **[top](#table-of-contents)**
 
 ## Browser Compatibility
-  - Target modern browsers (>=ie9)
+  - Target modern browsers `ie >= 9`
 
 **[top](#table-of-contents)**
 
@@ -470,25 +470,252 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
 ### Simple
 
+  - Each line should contain at most one statement.
+  - A semicolon should be placed at the end of every simple statement.
+  
+  ```typescript
+  // bad
+  var greeting = 'Hello World'
+
+  alert(greeting)
+  
+  // good
+  var greeting = 'Hello World';
+
+  alert(greeting);
+  ```
+
 ### Compound
+
+Compound statements are statements containing lists of statements enclosed in curly braces `{}`.
+
+  - The enclosed statements should start on a newline.
+  - The enclosed statements should be indented 4 spaces.
+
+  ```typescript
+  // bad
+  if (condition === true) { alert('Passed!'); }
+  
+  // good
+  if (condition === true) { 
+      alert('Passed!'); 
+  }
+  ```
+  - The left curly brace `{` should be at the end of the line that begins the compound statement.
+  - The right curly brace `}` should begin a line and be indented to align with the line containing the left curly brace `{`.
+  
+  ```typescript
+  // bad
+  if (condition === true)
+  { 
+      alert('Passed!');
+  }
+
+  // good
+  if (condition === true) {
+      alert('Passed!');
+  }
+  ```
+  
+  - **Braces `{}` must be used around all compound statements** even if they are only single-line statements.
+  
+  ```typescript
+  // bad
+  if (condition === true) alert('Passed!');
+
+  // bad
+  if (condition === true)
+      alert('Passed!');
+  
+  // good
+  if (condition === true) {
+      alert('Passed!');
+  }
+  ```
+
+If you do not add braces `{}` around compound statements, it makes it very easy to accidentally introduce bugs.
+
+  ```typescript
+  if (condition === true)
+      alert('Passed!');
+      return condition;
+  ```
+  
+It appears the intention of the above code is to return if `condition === true`, but without braces `{}` the return statement will be executed regardless of the condition.
+
+  - Compount statements do not need to end in a semicolon `;` with the exception of a `do { } while();` statement.
 
 ### Return
 
+  - If a `return` statement has a value you should not use parenthesis `()` around the value.
+  - The return value expression must start on the same line as the `return` keyword.
+  
+  ```typescript
+  // bad
+  return 
+      'Hello World!';
+
+  // bad
+  return ('Hello World!');
+
+  // good
+  return 'Hello World!';
+  ```
+
+  - It is recommended to take a return-first approach whenever possible.
+  
+  ```typescript
+  // bad
+  function getHighestNumber(a: number, b: number) {
+      var out = b;
+
+      if(a >= b) {
+          out = a;
+      }
+
+      return out;
+  }
+  
+  // good
+  function getHighestNumber(a: number, b: number) {
+      if(a >= b) {
+          return a;
+      }
+
+      return b;
+  }
+  ```
+
 ### If
+
+  - Alway be explicit in your `if` statement conditions.
+  
+  ```typescript
+  // bad
+  function isString(str: any) {
+      return !!str;
+  }
+
+  // good
+  function isString(str: any) {
+      return typeof str === 'string';
+  }
+  ```
+
+Sometimes simply checking falsy/truthy values is fine, but the general approach is to be explicit with what you are looking for. This can prevent a lot of unncessary bugs.
+
+If statements should take the following form:
+
+  ```typescript
+  if (/* condition */) {
+      // ...
+  }
+  
+  if (/* condition */) {
+      // ...
+  } else {
+      // ...
+  }
+  
+  if (/* condition */) {
+      // ...
+  } else if (/* condition */) {
+      // ...
+  } else {
+      // ...
+  }
+  ```
 
 ### For
 
+For statements should have the following form:
+
+  ```typescript
+  for(/* initialization */; /* condition */; /* update */) {
+      // ...
+  }
+  
+  var keys = Object.keys(/* object */),
+      length = keys.length;
+  
+  for(var i = 0; i < length; ++i) {
+      // ...
+  }
+  ```
+
+Object.prototype.keys is supported in `ie >= 9`.
+
+  - Use Object.prototype.keys in lieu of a `for...in` statement.
+
 ### While
+
+While statements should have the following form:
+
+  ```typescript
+  while (/* condition */) {
+      // ...
+  }
+  ```
 
 ### Do While
 
+  - Do while statements should be avoided unless absolutely necessary to maintain consistency.
+  - Do while statements must end with a semicolon `;`
+
+Do while statements should have to following form:
+
+  ```typescript
+  do {
+      // ...
+  } while (/* condition */);
+  ```
+
 ### Switch
+
+Switch statements should have the following form:
+
+  ```typescript
+  switch (/* expression */) {
+      case /* expression */:
+          // ...
+          /* termination */
+      default:
+          // ...
+  }
+  ```
+
+  - Each switch group except default should end with `break`, `return`, or `throw`.
 
 ### Try
 
+  - Try statements should be avoided whenever possible. They are not a good way of providing flow control.
+
+Try statements should have the following form:
+
+  ```typescript
+  try {
+      // ...
+  } catch (error: Error) {
+      // ...
+  }
+  
+  try {
+      // ...
+  } catch (error: Error) {
+      // ...
+  } finally {
+      // ...
+  }
+  ```
+
 ### Continue
 
+  - It is recommended to take a continue-first approach in all loops.
+
 ### Throw
+
+  - Avoid the use of the throw statement unless absolutely necessary.
+  - Flow control through try/catch exception handling is not recommended.
 
 **[top](#table-of-contents)**
 
