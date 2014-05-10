@@ -164,6 +164,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   ```
 
+**[top](#table-of-contents)**
+
 ### Inline
 
   - Inline comments are comments inside of complex statements (loops, functions, etc). 
@@ -199,6 +201,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
       }, millis);
   }
   ```
+
+**[top](#table-of-contents)**
 
 ### Todo and XXX
 
@@ -259,8 +263,6 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   // b will be defined on global scope.
   var a = b = 2, c = 4;
   ```
-
-**[top](#table-of-contents)**
 
 ## Function Declarations
 
@@ -337,6 +339,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   ```
 
+**[top](#table-of-contents)**
+
 ### Anonymous Functions
 
   - All anonymous functions should be defined as fat-arrow `() => { }` functions unless it is absolutely necessary to preserve the context in the function body.
@@ -395,6 +399,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
   - Variable, module, and function names should use lowerCamelCase.
 
+**[top](#table-of-contents)**
+
 ### Types
 
   - Types should be used whenever necessary.
@@ -414,6 +420,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   // good
   var numbers: Array<number> = [];
   ```
+
+**[top](#table-of-contents)**
 
 ### Classes
 
@@ -446,6 +454,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   ```
 
+**[top](#table-of-contents)**
+
 ### Interfaces
 
   - Interfaces should use UpperCamelCase.
@@ -459,6 +469,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
       toString(): string;
   }
   ```
+
+**[top](#table-of-contents)**
 
 ### Constants
 
@@ -484,6 +496,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
   alert(greeting);
   ```
+
+**[top](#table-of-contents)**
 
 ### Compound
 
@@ -545,6 +559,8 @@ It appears the intention of the above code is to return if `condition === true`,
 
   - Compount statements do not need to end in a semicolon `;` with the exception of a `do { } while();` statement.
 
+**[top](#table-of-contents)**
+
 ### Return
 
   - If a `return` statement has a value you should not use parenthesis `()` around the value.
@@ -586,6 +602,8 @@ It appears the intention of the above code is to return if `condition === true`,
   }
   ```
 
+**[top](#table-of-contents)**
+
 ### If
 
   - Alway be explicit in your `if` statement conditions.
@@ -626,6 +644,8 @@ If statements should take the following form:
   }
   ```
 
+**[top](#table-of-contents)**
+
 ### For
 
 For statements should have the following form:
@@ -647,6 +667,8 @@ Object.prototype.keys is supported in `ie >= 9`.
 
   - Use Object.prototype.keys in lieu of a `for...in` statement.
 
+**[top](#table-of-contents)**
+
 ### While
 
 While statements should have the following form:
@@ -656,6 +678,8 @@ While statements should have the following form:
       // ...
   }
   ```
+
+**[top](#table-of-contents)**
 
 ### Do While
 
@@ -669,6 +693,8 @@ Do while statements should have to following form:
       // ...
   } while (/* condition */);
   ```
+
+**[top](#table-of-contents)**
 
 ### Switch
 
@@ -685,6 +711,8 @@ Switch statements should have the following form:
   ```
 
   - Each switch group except default should end with `break`, `return`, or `throw`.
+
+**[top](#table-of-contents)**
 
 ### Try
 
@@ -708,9 +736,13 @@ Try statements should have the following form:
   }
   ```
 
+**[top](#table-of-contents)**
+
 ### Continue
 
   - It is recommended to take a continue-first approach in all loops.
+
+**[top](#table-of-contents)**
 
 ### Throw
 
