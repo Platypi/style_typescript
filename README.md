@@ -20,6 +20,7 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
     1. [Anonymous Functions](#anonymous-functions)
   1. [Names](#names)
     1. [Variables, Modules, and Functions](#variables-modules-and-functions)
+    1. [Types](#types)
     1. [Classes](#classes)
     1. [Interfaces](#interfaces)
     1. [Constants](#constants)
@@ -388,13 +389,80 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
 ## Names
 
+  - All variable and function names should be formed with alphanumeric `A-Z, a-z, 0-9` and underscore `_` charcters.
+
 ### Variables, Modules, and Functions
+
+  - Variable, module, and function names should use lowerCamelCase.
+
+### Types
+
+  - Types should be used whenever necessary.
+  - Arrays should be defined as `Array<type>` instead of `type[]`.
+  - Use the `any` type sparingly, it is always better to define an interface.
+  - Always define the return type of functions.
+  - If TypeScript is capable of implicitly determining the return type of a function, then it is unnecessary to define the return type.
+  - Always define the types of variables/parameters unless TypeScript can implicitly infer their type.
+  
+  ```typescript
+  // bad
+  var numbers = [];
+
+  // bad
+  var numbers: number[] = [];
+
+  // good
+  var numbers: Array<number> = [];
+  ```
 
 ### Classes
 
+  - Classes/Constructors should use UpperCamelCase (PascalCase).
+  -`Private` and `private static` members in classes should be denoted with the `private` keyword.
+  - `Private` and `private static` members should be prefaced with 2 underscores `__`.
+  - `Protected` members in classes do not use the `private` keyword.
+  - `Protected` members in classes should be prefaced with 1 underscore `_`.
+
+  ```typescript
+  class Person {
+      private __fullName: string;
+      
+      constructor(public firstName: string, public lastName: string) {
+          this.__fullName = firstName + ' ' + lastName;
+      }
+      
+      _walkFor(millis: number) {
+          console.log(this.__fullName + ' is now walking.');
+          
+          // Wait for millis milliseconds to stop walking
+          setTimeout(() => {
+              console.log(this.__fullName + ' has stopped walking.');
+          }, millis);
+      }
+      
+      toString() {
+          return this.__fullName;
+      }
+  }
+  ```
+
 ### Interfaces
 
+  - Interfaces should use UpperCamelCase.
+  - Interfaces should be prefaced with the capital letter I.
+  - Only `public` members should be in an interface, leave out `protected` and `private` members.
+  
+  ```typescript
+  interface IPerson {
+      firstName: string;
+      lastName: string;
+      toString(): string;
+  }
+  ```
+
 ### Constants
+
+  - All constants should use UPPER_SNAKE_CASE.
 
 **[top](#table-of-contents)**
 
