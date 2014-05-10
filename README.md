@@ -721,20 +721,108 @@ Try statements should have the following form:
 
 ## Whitespace
 
+Blank lines improve code readability by allowing the developer to logically group code blocks. Blank spaces should be used in the following circumstances.
+
+  - A keyword followed by left parenthesis `(` should be separated by 1 space.
+  
+  ```typescript
+  // bad
+  if(condition) {
+      // ...
+  }
+
+  // good
+  if (condition) {
+      // ...
+  }
+  ```
+
+  - All operators except for period `.`, left parenthesis `(`, and left bracket `[` should be separated from their operands by a space.
+
+  ```typescript
+  // bad
+  var sum = a+b;
+  
+  // good
+  var sum = a + b;
+  
+  // bad
+  var name = person . name;
+  
+  // good
+  var name = person.name;
+  
+  // bad
+  var item = items [4];
+  
+  // good
+  var item = items[4];
+  ```
+
+  - No space should separate a unary/incremental operator `!x, -x, +x, ~x, ++x, --x` and its operand.
+  
+  ```typescript
+  // bad
+  var neg = - a;
+
+  // good
+  var neg = -a;
+  ```
+  
+  - Each semicolon `;` in the control part of a `for` statement should be followed with a space.
+  
+  ```typescript
+  // bad
+  for(var i = 0;i < 10;++i) {
+      // ...
+  }
+
+  // good
+  for(var i = 0; i < 10; ++i) {
+      // ...
+  }
+  ```
+
 **[top](#table-of-contents)**
 
 ## Object and Array Literals
+
+  - Use curly braces `{}` instead of `new Object()`.
+  - Use brackets `[]` instead of `new Array()`.
 
 **[top](#table-of-contents)**
 
 ## Assignment Expressions
 
+  - Assignment expressions inside of the condition block of `if`, `while`, and `do while` statements should be avoided.
+
+  ```typescript
+  // bad
+  while (node = node.next) {
+      // ...
+  }
+  
+  // good
+  while (typeof node === 'object') {
+      node = node.next;
+      
+      // ...
+  }
+  ```
+
 **[top](#table-of-contents)**
 
 ## === and !== Operators
 
+  - It is better to use `===` and `!==` operators whenever possible.
+  - `==` and `!=` operators do type coercion, which can lead to headaches when debugging code.
+
 **[top](#table-of-contents)**
 
 ## Eval
+
+  - **Never use eval**
+  - **Never use the Function constructor**
+  - **Never pass strings to `setTimeout` or `setInterval`**
 
 **[top](#table-of-contents)**
