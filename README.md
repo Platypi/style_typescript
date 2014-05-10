@@ -230,6 +230,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   - Implied global variables should never be used. 
   - You should never define a variable on the global scope from within a smaller scope.
   
+  ```typescript
   // bad
   function add(a: number, b: number) {
       // c is on the global scope!
@@ -237,12 +238,151 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
       
       return a + b + c;
   }
+  ```
+
+  - Use one `var` keyword to define a block of variables.
+  - Declare each variable on a newline.
+  
+  ```typescript
+  // bad
+  var a = 2;
+  var b = 2;
+  var c = 4;
+
+  // good
+  var a = 2,
+      b = 2,
+      c = 4;
+  
+  // bad
+  // b will be defined on global scope.
+  var a = b = 2, c = 4;
+  ```
 
 **[top](#table-of-contents)**
 
 ## Function Declarations
 
+  - All functions must be declared before they are used.
+  - Any closure functions should be defined right after the var declarations.
+
+  ```typescript
+  // bad
+  function createGreeting(name: string) {
+      var message = 'Hello ';
+
+      return greet;
+
+      function greet() {
+          return message + name + '!';
+      }
+  }
+  
+  // good
+  function createGreeting(name: string) {
+      var message = 'Hello ';
+
+      function greet() {
+          return message + name + '!';
+      }
+
+      return greet;
+  }
+  ```
+
+  - There should be no space between the name of the function and the left parenthesis `(` of its parameter list.
+  - There should be one space between the right parenthesis `)` and the left curly `{` brace that begins the statement body.
+
+  ```typescript
+  // bad
+  function foo (){
+      // ...
+  }
+  
+  // good
+  function foo() {
+      // ...
+  }
+  ```
+
+  - The body of the function should be indented 4 spaces.
+  - The right curly brace `}` should be on a new line.
+  - The right curly brace `}` should be aligned with the line containing the left curly brace `{` that begins the function statement.
+  
+  ```typescript
+  // bad
+  function foo() {
+    return 'foo';}
+
+  // good
+  function foo() {
+      return 'foo';
+  }
+  ```
+  
+  - For each function parameter
+    - There should be no space between the parameter and the colon `:` indicating the type declaration.
+    - There should be a space between the colon `:` and the type declaration.
+
+  ```typescript
+  // bad
+  function greet(name:string) {
+    // ...
+  }
+  
+  // good
+  function greet(name: string) {
+    // ...
+  }
+  ```
+
 ### Anonymous Functions
+
+  - All anonymous functions should be defined as fat-arrow `() => { }` functions unless it is absolutely necessary to preserve the context in the function body.
+  - All fat-arrow functions should have parenthesis `()` around the function parameters.
+
+  ```typescript
+  // bad
+  clickAlert() {
+      var element = document.querySelector('div');
+      
+      this.foo = 'foo';
+      
+      element.addEventListener('click', function(ev: Event) {
+          // this.foo does not exist!
+          alert(this.foo);
+      });
+  }
+  
+  // good
+  clickAlert() {
+      var element = document.querySelector('div');
+      
+      this.foo = 'foo';
+      
+      element.addEventListener('click', (ev: Event) => {
+          // TypeScript allows this.foo to exist!
+          alert(this.foo);
+      });
+  }
+  ```
+
+  - There should be a space between the right parenthesis `)` and the `=>`
+  - There should be a space between the `=>` and the left curly brace `{` that begins the statement body.
+
+  ```typescript
+  // bad
+  element.addEventListener('click', (ev: Event)=>{alert('foo');});
+  
+  // good
+  element.addEventListener('click', (ev: Event) => {
+      alert('foo');
+  });
+  ```
+
+  - The statement body should be indented 4 spaces.
+  - The right curly brace `}` should be on a new line.
+  - The right curly brace `}` should be aligned with the line containing the  left curly brace `{` that begins the function statement.
 
 **[top](#table-of-contents)**
 
