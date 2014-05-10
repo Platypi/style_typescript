@@ -427,7 +427,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 ### Classes
 
   - Classes/Constructors should use UpperCamelCase (PascalCase).
-  -`Private` and `private static` members in classes should be denoted with the `private` keyword.
+  - `Private` and `private static` members in classes should be denoted with the `private` keyword.
   - `Private` and `private static` members should be prefaced with 2 underscores `__`.
   - `Protected` members in classes do not use the `private` keyword.
   - `Protected` members in classes should be prefaced with 1 underscore `_`.
