@@ -344,8 +344,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
 ### Anonymous Functions
 
-  - All anonymous functions should be defined as fat-arrow `() => { }` functions unless it is absolutely necessary to preserve the context in the function body.
-  - All fat-arrow functions should have parenthesis `()` around the function parameters.
+  - All anonymous functions should be defined as fat-arrow/lambda `() => { }` functions unless it is absolutely necessary to preserve the context in the function body.
+  - All fat-arrow/lambda functions should have parenthesis `()` around the function parameters.
 
   ```typescript
   // bad
