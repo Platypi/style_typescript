@@ -604,7 +604,7 @@ It appears the intention of the above code is to return if `condition === true`,
   }
   ```
 
-  - You should always explicitly define a return type. This can help TypeScript validate that you are always returning something that matches the correct type.
+  - Always *explicitly define a return type*. This can help TypeScript validate that you are always returning something that matches the correct type.
 
   ```typescript
   // bad
