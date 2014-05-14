@@ -41,6 +41,7 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
   1. [Assignment Expressions](#assignment-expressions)
   1. [=== and !== Operators](#===-and-!==-Operators)
   1. [Eval](#eval)
+  1. [TSLint](#tslint)
   1. [License](#license) 
 
 ## Introduction
@@ -873,6 +874,15 @@ Blank lines improve code readability by allowing the developer to logically grou
   - **Never pass strings to `setTimeout` or `setInterval`**
 
 **[top](#table-of-contents)**
+
+## TSLint
+
+  - Always use a Linter
+
+Linting your code is very helpful for preventing minor issues that can escape the eye during development. We use TSLint (written by Palantir) for our linter.
+
+  - TSLint: https://github.com/palantir/tslint
+  - Our [tslint.json](https://github.com/Platypi/style_typescript/blob/master/tslint.json)
 
 ## License
 (The MIT License)
