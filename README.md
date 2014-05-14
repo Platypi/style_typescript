@@ -116,7 +116,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
    * 
    * @param name The name of the greeted person.
    */
-  function getGreeting(name: string) {
+  function getGreeting(name: string): string {
       return 'Hello ' + name + '!';
   }
   ```
@@ -139,7 +139,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        * 
        * @param name The name of the new Person.
        */
-      static GetPerson(name: string) {
+      static GetPerson(name: string): Person {
           return new Person(name);
       }
       
@@ -272,7 +272,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
   ```typescript
   // bad
-  function createGreeting(name: string) {
+  function createGreeting(name: string): string {
       var message = 'Hello ';
 
       return greet;
@@ -283,7 +283,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   
   // good
-  function createGreeting(name: string) {
+  function createGreeting(name: string): string {
       var message = 'Hello ';
 
       function greet() {
@@ -315,11 +315,11 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   ```typescript
   // bad
-  function foo() {
+  function foo(): string {
     return 'foo';}
 
   // good
-  function foo() {
+  function foo(): string {
       return 'foo';
   }
   ```
@@ -583,7 +583,7 @@ It appears the intention of the above code is to return if `condition === true`,
   
   ```typescript
   // bad
-  function getHighestNumber(a: number, b: number) {
+  function getHighestNumber(a: number, b: number): number {
       var out = b;
 
       if(a >= b) {
@@ -594,12 +594,26 @@ It appears the intention of the above code is to return if `condition === true`,
   }
   
   // good
-  function getHighestNumber(a: number, b: number) {
+  function getHighestNumber(a: number, b: number): number {
       if(a >= b) {
           return a;
       }
 
       return b;
+  }
+  ```
+
+  - You should always explicitly define a return type. This can help TypeScript validate that you are always returning something that matches the correct type.
+
+  ```typescript
+  // bad
+  function getPerson(name: string) {
+      return new Person(name);
+  }
+  
+  // good
+  function getPerson(name: string): Person {
+      return new Person(name);
   }
   ```
 
