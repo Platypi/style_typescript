@@ -7,7 +7,7 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
 
   1. [Introduction](#introduction)
   1. [Browser Compatibility](#browser-compatibility)
-  1. [File Naming Conventions](#file-naming-conventions)
+  1. [Files](#files)
   1. [Indentation](#indentation)
   1. [Line Length](#line-length)
   1. [Quotes](#quotes)
@@ -54,10 +54,11 @@ When developing software as an organization, the value of the software produced 
 
 **[top](#table-of-contents)**
 
-## File Naming Conventions
+## Files
   - All TypeScript files must have a ".ts" extension.
   - They should be all lower case, and only include letters, numbers, and periods. 
   - It is OK (even recommended) to separate words with periods (e.g. `my.view.html`).
+  - All files should end in a new line. This is necessary for some Unix systems.
 
 **[top](#table-of-contents)**
 
