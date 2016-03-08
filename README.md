@@ -885,8 +885,9 @@ Blank lines improve code readability by allowing the developer to logically grou
 
 ### External
 
-  - Use [tsd](http://definitelytyped.org/tsd/) for all external library declarations
-  - Actively add/update/contribute typings to [DefinitelyTyped](http://definitelytyped.org/) when they are missing
+  - Typings are sometimes packaged with node modules, in this case you don't need to do anything
+  - Use [typings](https://github.com/typings/typings) for all external library declarations not included in `node_modules`
+  - Actively add/update/contribute typings when they are missing
 
 ### Internal
 
