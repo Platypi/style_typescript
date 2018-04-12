@@ -40,7 +40,7 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
   0. [Whitespace](#whitespace)
   0. [Object and Array Literals](#object-and-array-literals)
   0. [Assignment Expressions](#assignment-expressions)
-  0. [=== and !== Operators](===-and-!==-operators)
+  0. [=== and !== Operators](#-and--operators)
   0. [Promises and Async/Await](#promises-and-async-await)
   0. [Typings](#assignment-expressions)
     0. [External](#external)
