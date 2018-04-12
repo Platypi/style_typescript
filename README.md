@@ -11,6 +11,7 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
   0. [Indentation](#indentation)
   0. [Line Length](#line-length)
   0. [Quotes](#quotes)
+  0. [Commas](#commas)
   0. [Comments](#comments)
     0. [Class](#class)
     0. [Inline](#inline)
@@ -37,8 +38,10 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
     0. [Try](#try)
     0. [Continue](#continue)
     0. [Throw](#throw)
+  0. [Iterators](#iterators)
   0. [Whitespace](#whitespace)
   0. [Object and Array Literals](#object-and-array-literals)
+  0. [Destructuring](#destructuring)
   0. [Assignment Expressions](#assignment-expressions)
   0. [=== and !== Operators](#-and--operators)
   0. [Promises and Async/Await](#promises-and-async-await)
@@ -115,6 +118,35 @@ When developing software as an organization, the value of the software produced 
 
   // good
   let template = `string text ${expression} string text`;
+  ```
+
+**[top](#table-of-contents)**
+
+## Commas
+  - Use trailing commas always. DO NOT USE leading commas.
+  - Always use an additional trailing comma
+
+  ```typescript
+  // bad
+  const person = {
+      firstName: 'John'
+    , lastname: 'Smith'
+    , email: 'john.smith@outlook.com'
+  };
+
+  // bad
+  const person = {
+      firstName: 'John',
+      lastname: 'Smith',
+      email: 'john.smith@outlook.com'
+  };
+
+  // good
+  const person = {
+      firstName: 'John',
+      lastname: 'Smith',
+      email: 'john.smith@outlook.com',
+  };
   ```
 
 **[top](#table-of-contents)**
@@ -889,10 +921,93 @@ Blank lines improve code readability by allowing the developer to logically grou
 
 **[top](#table-of-contents)**
 
+## Iterators
+
+Don't use iterators whenever it's possible to use higher-order functions.
+
+  ```typescript
+  // bad
+  const numbers = [1, 2, 3];
+  let sum = 0;
+
+  for (let num of numbers) {
+      sum += num;
+  }
+
+  // good
+  const numbers = [1, 2, 3];
+  const sum = numbers.reduce((prev, current) => {
+      return prev + current;
+  }, 0);
+
+  // bad
+  const number = [1, 2, 3];
+  const add1 = [];
+  for (let i = 0; i < numbers.length; i += 1) {
+    add1.push(numbers[i] + 1);
+  }
+
+  // good
+  const number = [1, 2, 3];
+  const add1 = numbers.map((num) => {
+      return num + 1;
+  });
+  ```
+
+**[top](#table-of-contents)**
+
 ## Object and Array Literals
 
   - Use curly braces `{}` instead of `new Object()`.
   - Use brackets `[]` instead of `new Array()`.
+
+**[top](#table-of-contents)**
+
+## Destructuring
+
+  - Use Object destructuring always.
+  - Use Array destructuring except when returning
+
+  ```typescript
+  // bad
+  function toName(user) {
+      const firstName = user.firstName;
+      const lastName = user.lastName;
+      const email = user.email;
+
+      if (isEmpty(lastName)) {
+          if (isEmpty(firstName)) {
+              return email;
+          }
+
+          return firstName;
+      }
+
+      return `${firstName} ${lastName}`;
+  }
+
+  // good
+  function toName({ firstName, lastName, email }) {
+      if (isEmpty(lastName)) {
+          if (isEmpty(firstName)) {
+              return email;
+          }
+
+          return firstName;
+      }
+
+      return `${firstName} ${lastName}`;
+  }
+
+  const arr = [1, 2, 3, 4];
+
+  // bad
+  const first = arr[0];
+  const second = arr[1];
+
+  // good
+  const [first, second] = arr;
+  ```
 
 **[top](#table-of-contents)**
 
