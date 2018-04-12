@@ -1,0 +1,18 @@
+{
+    "name": "style-typescript-helpers",
+    "version": "1.0.0",
+    "dependencies": {
+        "typescript": "latest"
+    },
+    "devDependencies": {
+        "prettier": "latest",
+        "tslint": "latest",
+        "tslint-microsoft-contrib": "latest"
+    },
+    "scripts": {
+        "format": "prettier --loglevel warn --config prettier.config.js --write \"{src}/**/*.ts\"",
+        "lint": "tslint --fix --force -p tsconfig.json -c tslint.json",
+        "ts:client": "tsc -p tsconfig.client.json",
+        "ts:server": "tsc -p tsconfig.server.json"
+    }
+}

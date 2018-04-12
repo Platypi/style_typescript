@@ -40,12 +40,15 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
   0. [Whitespace](#whitespace)
   0. [Object and Array Literals](#object-and-array-literals)
   0. [Assignment Expressions](#assignment-expressions)
+  0. [=== and !== Operators](===-and-!==-operators)
+  0. [Promises and Async/Await](#promises-and-async-await)
   0. [Typings](#assignment-expressions)
     0. [External](#external)
     0. [Internal](#internal)
-  0. [=== and !== Operators](#===-and-!==-Operators)
   0. [Eval](#eval)
   0. [TSLint](#tslint)
+  0. [Prettier](#prettier)
+  0. [Helper Files](#project-helper-files)
   0. [License](#license)
 
 ## Introduction
@@ -61,7 +64,7 @@ When developing software as an organization, the value of the software produced 
 **[top](#table-of-contents)**
 
 ## Files
-  - All TypeScript files must have a ".ts" extension.
+  - All TypeScript files must have a ".ts" or ".tsx" extension.
   - They should be all lower case, and only include letters, numbers, and periods.
   - It is OK (even recommended) to separate words with periods (e.g. `my.view.html`).
   - **All files should end in a new line.** This is necessary for some Unix systems.
@@ -82,6 +85,8 @@ When developing software as an organization, the value of the software produced 
 
 ## Quotes
   - Use single-quotes `''` for all strings, and use double-quotes `""` for strings within strings.
+  - When you need to use an apostrophe inside a string it is recommended to use double-quotes.
+  - Use template literals only when using expression interplation `${}`
 
   ```typescript
   // bad
@@ -91,6 +96,12 @@ When developing software as an organization, the value of the software produced 
   let greeting = 'Hello World!';
 
   // bad
+  let phrase = 'It\'s Friday!';
+
+  // good
+  let phrase = "It's Friday!";
+
+  // bad
   let html = "<div class='bold'>Hello World</div>";
 
   // bad
@@ -98,6 +109,12 @@ When developing software as an organization, the value of the software produced 
 
   // good
   let html = '<div class="bold">Hello World</div>';
+
+  // bad
+  let template = `string text string text`;
+
+  // good
+  let template = `string text ${expression} string text`;
   ```
 
 **[top](#table-of-contents)**
@@ -147,7 +164,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        *
        * @param name The name of the new Person.
        */
-      static GetPerson(name: string): Person {
+      public static GetPerson(name: string): Person {
           return new Person(name);
       }
 
@@ -163,7 +180,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        * @param millis The number of milliseconds the Person
        * should walk.
        */
-      walkFor(millis: number): void {
+      public walkFor(millis: number): void {
           console.log(this.name + ' is now walking.');
 
           setTimeout(() => {
@@ -231,12 +248,12 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   // bad
   console.log(a + b);
 
-  let a = 2,
-      b = 4;
+  let a = 2;
+  let b = 4;
 
   // good
-  let a = 2,
-      b = 4;
+  let a = 2;
+  let b = 4;
 
   console.log(a + b);
   ```
@@ -254,19 +271,19 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   ```
 
-  - Use one `let` keyword to define a block of variables.
   - Declare each variable on a newline.
+  - Use `let` or `const` to declare each variable. This can save you a lot of trouble when refactoring.
 
   ```typescript
   // bad
-  let a = 2;
-  let b = 2;
-  let c = 4;
-
-  // good
   let a = 2,
       b = 2,
       c = 4;
+
+  // good
+  let a = 2;
+  let b = 2;
+  let c = 4;
 
   // bad
   // b will be defined on global scope.
@@ -381,6 +398,21 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   ```
 
+  - Always surround the function block with braces `{}`
+
+  ```typescript
+  // bad
+  element.addEventListener('submit', ev => ev.preventDefault());
+
+  // bad
+  element.addEventListener('submit', (ev: Event) => ev.preventDefault());
+
+  // good
+  element.addEventListener('submit', (ev: Event) => {
+      ev.preventDefault();
+  });
+  ```
+
   - There should be a space between the right parenthesis `)` and the `=>`
   - There should be a space between the `=>` and the left curly brace `{` that begins the statement body.
 
@@ -410,7 +442,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
 ### Use of var, let, and const
 
-  - Use `const` where appropriate, for values that should never change
+  - Use `const` where appropriate, for values that never change
   - Use `let` everywhere else
   - Avoid using `var`
 
@@ -419,9 +451,9 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 ### Types
 
   - Always favor type inference over explicit type declaration except for function return types
-  - Always define the return type of functions.
+  - Always define the return type of functions. This can help catch errors as the functions evolve.
   - Types should be used whenever necessary (no implicit `any`).
-  - Arrays should be defined as `Array<type>` instead of `type[]`.
+  - Arrays should be defined as `type[]` instead of `Array<type>` .
   - Use the `any` type sparingly, it is always better to define an interface.
 
   ```typescript
@@ -429,10 +461,10 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   let numbers = [];
 
   // bad
-  let numbers: number[] = [];
+  let numbers: Array<number> = [];
 
   // good
-  let numbers: Array<number> = [];
+  let numbers: number[] = [];
   ```
 
 **[top](#table-of-contents)**
@@ -454,7 +486,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
           this.fullName = firstName + ' ' + lastName;
       }
 
-      toString() {
+      public toString() {
           return this.fullName;
       }
 
@@ -489,7 +521,6 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
 ### Constants
 
-  - All constants should use UPPER_SNAKE_CASE.
   - All constants you be defined with the `const` keyword.
 
 **[top](#table-of-contents)**
@@ -645,7 +676,7 @@ It appears the intention of the above code is to return if `condition === true`,
   }
 
   // good
-  function isString(str: any) {
+  function isString(str: any): str is string {
       return typeof str === 'string';
   }
   ```
@@ -685,10 +716,10 @@ For statements should have the following form:
       // ...
   }
 
-  let keys = Object.keys(/* object */),
-      length = keys.length;
+  let keys = Object.keys(/* object */);
+  let length = keys.length;
 
-  for(let i = 0; i < length; ++i) {
+  for(let i = 0; i < length; i += 1) {
       // ...
   }
   ```
@@ -696,6 +727,16 @@ For statements should have the following form:
 Object.prototype.keys is supported in `ie >= 9`.
 
   - Use Object.prototype.keys in lieu of a `for...in` statement.
+
+With TypeScript you can use `for...of` statements:
+
+  ```typescript
+  let arr = [2, 3, 4];
+
+  for (const value of arr) {
+      // ...
+  }
+  ```
 
 **[top](#table-of-contents)**
 
@@ -747,6 +788,7 @@ Switch statements should have the following form:
 ### Try
 
   - Try statements should be avoided whenever possible. They are not a good way of providing flow control.
+  - Try statements should be used when using `async/await` syntax.
 
 Try statements should have the following form:
 
@@ -835,12 +877,12 @@ Blank lines improve code readability by allowing the developer to logically grou
 
   ```typescript
   // bad
-  for(let i = 0;i < 10;++i) {
+  for(let i = 0;i < 10; i += 1) {
       // ...
   }
 
   // good
-  for(let i = 0; i < 10; ++i) {
+  for(let i = 0; i < 10; i += 1) {
       // ...
   }
   ```
@@ -881,12 +923,59 @@ Blank lines improve code readability by allowing the developer to logically grou
 
 **[top](#table-of-contents)**
 
+## Promises and Async/Await
+
+  - Always use `async/await` wherever possible. Avoid using `Promise.then` and `Promise.catch`.
+
+  ```typescript
+  // bad
+  function reddits(): Promise<reddit.IListing> {
+      return fetch('https://www.reddit.com/r/all.json')
+          .then((response) => {
+              return response.json();
+          })
+          .then((result) => {
+              return result.data;
+          })
+          .catch((error) => {
+              console.log(error);
+
+              return {
+                  kind: 'Listing',
+                  data: {
+                      children: [],
+                  },
+              };
+          });
+  }
+
+  // good
+  async function reddits(): Promise<reddit.IListing> {
+      try {
+          const response = await fetch('https://www.reddit.com/r/all.json');
+
+          return response.json();
+      } catch(error) {
+          console.log(error);
+
+          return {
+              kind: 'Listing',
+              data: {
+                  children: [],
+              },
+          };
+      }
+  }
+  ```
+
+**[top](#table-of-contents)**
+
 ## Typings
 
 ### External
 
   - Typings are sometimes packaged with node modules, in this case you don't need to do anything
-  - Use [typings](https://github.com/typings/typings) for all external library declarations not included in `node_modules`
+  - Use `@types` for all external library declarations not included in `node_modules`
   - Actively add/update/contribute typings when they are missing
 
 ### Internal
@@ -935,6 +1024,36 @@ Linting your code is very helpful for preventing minor issues that can escape th
 
   - TSLint: https://github.com/palantir/tslint
   - Our [tslint.json](https://github.com/Platypi/style_typescript/blob/master/tslint.json)
+  - Use `tslint-microsoft-contrib` (included in our tslint.json)
+
+**[top](#table-of-contents)**
+
+## Prettier
+
+  - Always use a formatter
+
+Formatting your code is very helpful for readability. When working in teams, it is nice to be able to look at code that is in the same format across the entire application.
+
+  - Prettier: https://github.com/prettier/prettier
+
+**[top](#table-of-contents)**
+
+## Project Helper Files
+We have provided a [package.json](https://github.com/Platypi/style_typescript/blob/master/package.json) that can serve has a starter for a TypeScript project. It has the following things:
+
+  - TypeScript
+    - `typescript` is listed as a dependency... obviously!
+    - 3 `tsconfig.json` files are included, one for a node server, one for client files, and one to use with text editors like VSCode or Atom
+    - The `tsconfig.json` files are configured with rules that closely match the rules defined in this guide.
+  - TSLint
+    - `tslint` and `tslint-microsoft-contrib` are listed as devDependencies
+    - a `lint` script that you can use in your projects with `npm run lint`
+  - Prettier
+    - `prettier` is listed as a devDependency
+    - a `prettier.config.js` file has some rule for prettier that closely match the rules defined in this guide.
+    - a `format` script is included that you can modify to suit your needs. It will call on prettier to format all the TypeScript files in the `src` directory by default.
+
+**[top](#table-of-contents)**
 
 ## License
 (The MIT License)
